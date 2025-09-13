@@ -22,20 +22,18 @@ historico_de_transação = ""
 def deposito(valor):
     global saldo
     global historico_de_transação
-    try:
-        float(valor)
-        if valor > 0:
-            saldo += valor 
-            historico_de_transação += f"+++ Depósito no valor de R${valor:.2f} .\n"
-    except:
-        ValueError
+    if valor > 0:
+        saldo += valor 
+        historico_de_transação += f"+++ Depósito no valor de R${valor:.2f} .\n"
+    else:
         print("\nValor digitado inválido. Informe uma quantia válida!")
+        
 
 while True:
     opcao = input(menu)
     match opcao:
         case "d":
-            valor = input("Informe o valor que você deseja depositar: ")
+            valor = float(input("Informe o valor que você deseja depositar: "))
             deposito(valor)
         case "s":
             print("\nsacar")
