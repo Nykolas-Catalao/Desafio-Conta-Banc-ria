@@ -17,12 +17,28 @@ LIMITE_NUMERO_SAQUES = 3
 saldo = 0
 saque = 0
 numero_saque = 0
+historico_de_transação = ""
+
+def deposito(valor):
+    global saldo
+    global historico_de_transação
+    try:
+        float(valor)
+        if valor > 0:
+            saldo += valor 
+            historico_de_transação += f"+++ Depósito no valor de R${valor:.2f} .\n"
+    except:
+        ValueError
+        print("\nValor digitado inválido. Informe uma quantia válida!")
 
 while True:
     opcao = input(menu)
     match opcao:
         case "d":
-            print("\ndepositar")
+            valor = input("Informe o valor que você deseja depositar: ")
+            deposito(valor)
+            print(historico_de_transação)
+            print(saldo)
         case "s":
             print("\nsacar")
         case "e":
@@ -31,4 +47,4 @@ while True:
             print("\nSaindo do programa...")
             break
         case _:
-            print("\nComando inválido! Selecione uma opção válida.")
+            print("\nComando inválido! Selecione uma opção válida.\n")
