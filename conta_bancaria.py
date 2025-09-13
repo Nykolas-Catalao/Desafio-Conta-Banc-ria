@@ -15,7 +15,6 @@ opções abaixo:
 LIMITE_SAQUE = 500
 LIMITE_NUMERO_SAQUES = 3
 saldo = 0
-saque = 0
 numero_saque = 0
 historico_de_transação = ""
 
@@ -29,6 +28,26 @@ def deposito(valor):
         print("\nValor digitado inválido. Informe uma quantia válida!")
         
 
+def sacar(valor):
+    global saldo
+    global numero_saque
+    global historico_de_transação
+    if (valor > 0) and (valor <= saldo) and (numero_saque < LIMITE_NUMERO_SAQUES) and (valor <= 500):
+        saldo -= valor
+        numero_saque += 1
+        historico_de_transação += f"--- Saque no valor de R${valor:.2f} .\n"
+    elif valor <= 0:
+        print("Valor de retirada inválido! Informe uma quantia válida.")
+    elif valor > 500:
+        print(f"Não foi possível sacar pois o valor de saque ultrapassou o limite!\nValor limite para sacar é R${LIMITE_SAQUE:.2f} .")
+    elif valor > saldo:
+        print("Não foi possível realizar o saque! Não há saldo o suficiente.")
+    elif numero_saque >= LIMITE_NUMERO_SAQUES:
+        print("Número de saques atingiu o limite! Não foi possível sacar.")
+    
+
+
+
 while True:
     opcao = input(menu)
     match opcao:
@@ -36,7 +55,8 @@ while True:
             valor = float(input("Informe o valor que você deseja depositar: "))
             deposito(valor)
         case "s":
-            print("\nsacar")
+            valor = float(input("Informe o valor a ser retirado da conta: "))
+            sacar(valor)
         case "e":
             print("\nextrato")
         case "q":
