@@ -37,8 +37,6 @@ while True:
         case "d":
             valor = input("Informe o valor que você deseja depositar: ")
             deposito(valor)
-            print(historico_de_transação)
-            print(saldo)
         case "s":
             print("\nsacar")
         case "e":
